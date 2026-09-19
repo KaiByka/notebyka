@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Update the description and title for each new code post. -->
+    <meta name="description" content="Write a short description of your code post here." />
+    <title>Code post title — Alex's notes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --background: #f7f7f4;
+        --text: #20201e;
+        --muted: #777771;
+        --line: #dcdcd5;
+        --accent: #b24b2a;
+        --code-background: #ecece6;
+        --code-comment: #777771;
+        --code-keyword: #8c3d22;
+        --code-string: #42664d;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--background);
+        color: var(--text);
+        font: 14px/1.8 "JetBrains Mono", monospace;
+      }
+
+      .layout {
+        max-width: 680px;
+        margin: 0 auto;
+        padding: 72px 32px;
+      }
+
+      .back,
+      nav a {
+        color: var(--muted);
+        text-decoration: none;
+      }
+
+      .back:hover,
+      nav a:hover,
+      article a:hover {
+        color: var(--accent);
+      }
+
+      article {
+        margin-top: 72px;
+      }
+
+      .eyebrow,
+      time {
+        color: var(--muted);
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      h1 {
+        margin: 10px 0 12px;
+        font-size: clamp(26px, 5vw, 40px);
+        font-weight: 500;
+        line-height: 1.25;
+        letter-spacing: -0.08em;
+      }
+
+      .meta {
+        margin: 0 0 48px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      article p {
+        max-width: 640px;
+        margin: 0 0 24px;
+      }
+
+      article h2 {
+        margin: 48px 0 12px;
+        font-size: 18px;
+        font-weight: 500;
+      }
+
+      article h3 {
+        margin: 36px 0 12px;
+        font-size: 15px;
+        font-weight: 500;
+      }
+
+      article a {
+        color: var(--accent);
+      }
+
+      code {
+        padding: 2px 5px;
+        background: var(--code-background);
+        font-size: 0.92em;
+      }
+
+      pre {
+        max-width: 100%;
+        margin: 0 0 24px;
+        padding: 16px;
+        overflow-x: auto;
+        border: 1px solid var(--line);
+        background: var(--code-background);
+        font-size: 12px;
+        line-height: 1.7;
+        tab-size: 2;
+        white-space: pre;
+      }
+
+      pre code {
+        padding: 0;
+        background: transparent;
+        font-size: inherit;
+      }
+
+      .comment {
+        color: var(--code-comment);
+      }
+
+      .keyword {
+        color: var(--code-keyword);
+      }
+
+      .string {
+        color: var(--code-string);
+      }
+
+      .section-title {
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0;
+      }
+
+      footer {
+        margin-top: 72px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      footer > div {
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .footer-nav {
+        margin-top: 16px;
+      }
+
+      .footer-nav a + a::before {
+        content: "/";
+        margin: 0 12px;
+        color: var(--line);
+      }
+
+      @media (max-width: 720px) {
+        .layout {
+          padding: 40px 24px;
+        }
+
+        article {
+          margin-top: 48px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="layout">
+      <main>
+        <a class="back" href="../index.html">← back home</a>
+
+        <article>
+          <!-- Replace the category, title, date, and reading time. -->
+          <div class="eyebrow">Učim</div>
+          <h1>Code post title</h1>
+          <p class="meta">
+            <time datetime="2026-09-17">2026.09.17</time> · 5 min read
+          </p>
+
+          <!-- Replace the example content below with your post. -->
+
+          <pre><code>Do[
+  DeviceWrite[arduino, 13 -> 1];
+  Pause[1];
+  ]</code></pre>
+
+          <p>
+            Write your opening paragraph here. Use <code>inline code</code>
+            when referring to a short command, function, or variable.
+          </p>
+          
+          <h2>Start with a small example</h2>
+          <p>Introduce the code before showing it so readers know what to look for.</p>
+
+          <pre><code><span class="keyword">const</span> message = <span class="string">"Hello, web"</span>;
+console.log(message);</code></pre>
+
+          <p>
+            Explain what the example does and why it matters. Longer examples
+            will scroll horizontally on small screens instead of breaking the page.
+          </p>
+
+          <h2>Another section</h2>
+          <p>Use the optional classes below when you want light manual highlighting:</p>
+
+          <pre><code><span class="comment">// A comment</span>
+<span class="keyword">function</span> greet(name) {
+  <span class="keyword">return</span> <span class="string">`Hello, ${name}`</span>;
+}</code></pre>
+
+          <p>Continue writing here, or remove sections you do not need.</p>
+        </article>
+
+        <footer>
+          <div>Notes from a small corner of the internet.</div>
+          <nav class="footer-nav" aria-label="Primary navigation">
+            <a href="../index.html">Home</a><a href="../about.html">About</a><a href="../archive.html">Archive</a><a href="../now.html">Now</a><a href="../cat-citam.html">Čitam</a><a href="../cat-gledam.html">Gledam</a><a href="../cat-slusam.html">Slušam</a><a href="../cat-ucim.html">Učim</a><a href="mailto:hello@example.com">Email</a>
+          </nav>
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>
