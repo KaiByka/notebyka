@@ -1,11 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="hr">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Update the description and title for each new post. -->
     <meta name="Antikapitalistička kuharica 1" content="Što ne valja s kapitalizmom." />
     <title>Antikapitalistička kuharica</title>
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -140,9 +141,40 @@
         }
 
       }
+
+      .margin-title {
+        position: fixed;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%) rotate(180deg);
+        writing-mode: vertical-rl;
+        max-height: 80vh;
+        color: var(--muted);
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      @media (max-width: 860px) {
+        .margin-title {
+          display: none;
+        }
+      }
+
+      ::selection {
+        background: var(--accent);
+        color: #f7f7f4;
+      }
+
+      a:focus-visible {
+        outline: 1px solid var(--accent);
+        outline-offset: 2px;
+      }
     </style>
   </head>
   <body>
+    <!-- Naslov u lijevoj margini: okrenut tekst, ovjde upiši što god želiš. -->
+    <div class="margin-title">Antikapitalistička kuharica 1</div>
     <div class="layout">
       <main>
         <a class="back" href="../index.html">← bježi kući! kakve su ovo šporkarije?</a>
@@ -155,13 +187,13 @@
           </p>
 
           <h2>Što ne valja s kapitalizmom?</h2>
-          <p>Da bi se shvatilo što nije u redu s kapitalizmom ne treba biti nikakav genijalac niti stručnjak – stvar je vrlo jednostavna. Što je socijalno pravednije i demokratičnije – da sredstva za proizvodnju (tvornice i poduzeća) budu u vlasništvu svih nas, čitavoga društva, ili u vlasništvu nekolicine ljudi (kapitalističke klase)? Je li logičnije da ekonomija funkcionira tako da se proizvodi i radi ono što je svima potrebno, da ekonomija funkcionira tako da svi imaju dovoljno i da svi imaju posao ili da čitava ekonomija funkcionira u interesu manjine (kapitalista), bez obzira na to koliko će ljudi biti nezaposleno, koliko će biti siromašnih i kakve će biti posljedice po okoliš u kojem svi živimo?</p>
+          <p style="text-indent:30px;">Da bi se shvatilo što nije u redu s kapitalizmom ne treba biti nikakav genijalac niti stručnjak – stvar je vrlo jednostavna. Što je socijalno pravednije i demokratičnije – da sredstva za proizvodnju (tvornice i poduzeća) budu u vlasništvu svih nas, čitavoga društva, ili u vlasništvu nekolicine ljudi (kapitalističke klase)? Je li logičnije da ekonomija funkcionira tako da se proizvodi i radi ono što je svima potrebno, da ekonomija funkcionira tako da svi imaju dovoljno i da svi imaju posao ili da čitava ekonomija funkcionira u interesu manjine (kapitalista), bez obzira na to koliko će ljudi biti nezaposleno, koliko će biti siromašnih i kakve će biti posljedice po okoliš u kojem svi živimo?</p>
 
           <h2>Za koga je kapitalizam dobar?</h2>
-          <p>Kapitalizam je relativno dobar sistem – za kapitalističku i političku elitu uvijek, uglavnom za višu srednju klasu i, kad nema krize, za koliko-toliko široke slojeve u možda 20–30 najrazvijenijih zemalja (zapadna Evropa, SAD i Kanada, Australija, Japan i sl.) iako i tamo ima svega (bijede, beskućnika itd.). Ali za sve ostale – uključujući i najveći broj ljudi u velikoj većini zemalja na svijetu – kao i za samu planetu koju uništava, kapitalizam nije i ne može biti dobar – osim utoliko što je razvio proizvodna sredstva koja nam omogućuju da uspostavimo bolji globalni ekonomski sistem.</p>
+          <p style="text-indent:30px;">Kapitalizam je relativno dobar sistem – za kapitalističku i političku elitu uvijek, uglavnom za višu srednju klasu i, kad nema krize, za koliko-toliko široke slojeve u možda 20–30 najrazvijenijih zemalja (zapadna Evropa, SAD i Kanada, Australija, Japan i sl.) iako i tamo ima svega (bijede, beskućnika itd.). Ali za sve ostale – uključujući i najveći broj ljudi u velikoj većini zemalja na svijetu – kao i za samu planetu koju uništava, kapitalizam nije i ne može biti dobar – osim utoliko što je razvio proizvodna sredstva koja nam omogućuju da uspostavimo bolji globalni ekonomski sistem.</p>
 
           <h2>Koga mrzimo?</h2>
-          <p>Ne mrzimo bogataše, mrzimo kapitalistički sistem koji stvara elitu od 1% društva na račun svih nas ostalih.</p>
+          <p style="text-indent:30px;">Ne mrzimo bogataše, mrzimo kapitalistički sistem koji stvara elitu od 1% društva na račun svih nas ostalih.</p>
 
           <h2>O lopovima</h2>
           <p>Kada se govori o lopovima, ljudima su često prva asocijacija neki maskirani ili odrpani likovi. Puno ispravnija asocijacija bila bi na uglađene ljude s kravatama koji se voze otmjenim limuzinama.</p>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>
+    text {
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 700;
+      fill: #b24b2a;
+    }
+    rect {
+      fill: none;
+      stroke: #b24b2a;
+    }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #d0703f; }
+      rect { stroke: #d0703f; }
+    }
+  </style>
+  <rect x="4" y="4" width="56" height="56" stroke-width="3" />
+  <text x="32" y="40" font-size="23" text-anchor="middle">n:b</text>
+</svg>

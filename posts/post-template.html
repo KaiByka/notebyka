@@ -1,11 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="hr">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Update the description and title for each new post. -->
     <meta name="description" content="Write a short description of your post here." />
     <title>Post title — Alex's notes</title>
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -60,6 +61,25 @@
         font-size: 12px;
         text-transform: uppercase;
         letter-spacing: 0.08em;
+      }
+
+      .margin-title {
+        position: fixed;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%) rotate(180deg);
+        writing-mode: vertical-rl;
+        max-height: 80vh;
+        color: var(--muted);
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      @media (max-width: 860px) {
+        .margin-title {
+          display: none;
+        }
       }
 
       h1 {
@@ -140,9 +160,22 @@
         }
 
       }
+
+      ::selection {
+        background: var(--accent);
+        color: #f7f7f4;
+      }
+
+      a:focus-visible {
+        outline: 1px solid var(--accent);
+        outline-offset: 2px;
+      }
     </style>
   </head>
   <body>
+    <!-- Naslov u lijevoj margini: okrenut tekst, ovjde upiši što god želiš.
+         Ako ga ne želiš, samo izbriši ovaj div. -->
+    <div class="margin-title">okrenuti naslov</div>
     <div class="layout">
       <main>
         <a class="back" href="../index.html">← back home</a>
