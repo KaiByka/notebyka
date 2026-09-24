@@ -70,6 +70,63 @@
         color: var(--muted);
       }
 
+       /* RADIO PLAYER: position, typography, and active-state animation */
+      .radio-control {
+        position: fixed;
+        top: 50%;
+        left: -44px;
+        z-index: 1;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        background: none;
+        color: var(--muted);
+        font: inherit;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transform: translateY(-50%) rotate(-90deg);
+        transform-origin: center;
+      }
+
+      .radio-control:hover,
+      .radio-control[aria-pressed="true"] {
+        color: var(--accent);
+      }
+
+      .radio-control[aria-pressed="true"] .radio-label {
+        animation: radio-pulse 1.4s ease-in-out infinite;
+      }
+
+      .radio-letter {
+        display: inline-block;
+        opacity: 1;
+        transition: opacity 80ms linear;
+      }
+
+      .radio-letter:not(.is-visible) {
+        opacity: 0;
+      }
+
+      @keyframes radio-pulse {
+        0%,
+        100% {
+          opacity: 0.65;
+        }
+
+        50% {
+          opacity: 1;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .radio-control[aria-pressed="true"] .radio-label {
+          animation: none;
+        }
+      }
+    
       .section-title {
         padding-bottom: 12px;
         border-bottom: 1px solid var(--line);
@@ -201,6 +258,10 @@
           <p class="intro">
             Odbijam prihvatiti bilo kakvo znanje jer me ometa u razmišljanju
           </p>
+          <!-- RADIO PLAYER: click to start or pause the Radio Rojc Pula stream -->
+          <button class="radio-control" type="button" aria-label="Radio Rojc Pula" aria-pressed="false">
+            <span class="radio-label" aria-hidden="true">Radio Rojc Pula</span>
+          </button>
         </header>
 
         <section aria-labelledby="posts-title">
@@ -251,5 +312,79 @@
         </footer>
       </main>
     </div>
+    <!-- RADIO PLAYER: audio stream and letter-by-letter playback animation -->
+    <audio id="radio-stream" preload="none" src="https://radio.widecast.cloud/stream/radiorojc.mp3"></audio>
+    <script>
+      // RADIO PLAYER: stream controls and sequential letter reveal
+      const radioControl = document.querySelector(".radio-control");
+      const radioStream = document.querySelector("#radio-stream");
+      const radioLabel = document.querySelector(".radio-label");
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      let revealTimer;
+
+      radioLabel.replaceChildren(
+        ...[...radioLabel.textContent].map((character) => {
+          if (character === " ") {
+            return document.createTextNode(" ");
+          }
+
+          const letter = document.createElement("span");
+          letter.className = "radio-letter is-visible";
+          letter.textContent = character;
+          return letter;
+        }),
+      );
+
+      const letters = [...radioLabel.querySelectorAll(".radio-letter")];
+
+      const stopLetterReveal = () => {
+        clearInterval(revealTimer);
+        letters.forEach((letter) => letter.classList.add("is-visible"));
+      };
+
+      const startLetterReveal = () => {
+        if (reducedMotion) {
+          return;
+        }
+
+        clearInterval(revealTimer);
+        letters.forEach((letter) => letter.classList.remove("is-visible"));
+        let visibleLetters = 0;
+        revealTimer = setInterval(() => {
+          letters[visibleLetters].classList.add("is-visible");
+          visibleLetters += 1;
+          if (visibleLetters === letters.length) {
+            clearInterval(revealTimer);
+          }
+        }, 70);
+      };
+
+      radioControl.addEventListener("click", async () => {
+        if (radioStream.paused) {
+          try {
+            await radioStream.play();
+            radioControl.setAttribute("aria-pressed", "true");
+            startLetterReveal();
+          } catch (error) {
+            console.error("Radio stream nije moguće pokrenuti.", error);
+          }
+          return;
+        }
+
+        radioStream.pause();
+        radioControl.setAttribute("aria-pressed", "false");
+        stopLetterReveal();
+      });
+
+      radioStream.addEventListener("ended", () => {
+        radioControl.setAttribute("aria-pressed", "false");
+        stopLetterReveal();
+      });
+
+      radioStream.addEventListener("error", () => {
+        radioControl.setAttribute("aria-pressed", "false");
+        stopLetterReveal();
+      });
+    </script>
   </body>
 </html>
