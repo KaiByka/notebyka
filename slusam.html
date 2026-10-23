@@ -49,7 +49,6 @@
         display: flex;
         align-items: center;
         gap: 8px;
-        margin: 0 0 12px;
         color: var(--muted);
         font-size: 12px;
         text-transform: uppercase;
@@ -116,6 +115,13 @@
         order: -1;
       }
 
+      .radio-card .radio-status,
+      .yt-card .radio-status {
+        order: 1;
+        align-self: flex-start;
+        margin: 0;
+      }
+
       .yt-card {
         position: relative;
         cursor: pointer;
@@ -153,7 +159,7 @@
         <article>
           <div class="post-grid" aria-label="Bilješke o slušanju">
             <button class="post radio-card" type="button" data-stream="https://radio.widecast.cloud/stream/radiorojc.mp3" aria-label="Radio Rojc Pula" aria-pressed="false">
-              <span class="radio-status"><span class="radio-dot" aria-hidden="true"></span>na projektu</span>
+              <span class="radio-status"><span class="radio-dot" aria-hidden="true"></span>van etera</span>
               <span class="note">
                 <span class="note-title">Radio Rojc Pula</span>
                 <span class="note-sub">pravi nezavisni radio. klikni pa čuj.</span>
@@ -161,7 +167,7 @@
               <time>001</time>
             </button>
             <button class="post radio-card" type="button" data-stream="https://stream.yammat.fm/radio/8000/yammat.mp3" aria-label="Yammat FM" aria-pressed="false">
-              <span class="radio-status"><span class="radio-dot" aria-hidden="true"></span>na projektu</span>
+              <span class="radio-status"><span class="radio-dot" aria-hidden="true"></span>van etera</span>
               <span class="note">
                 <span class="note-title">Yammat FM</span>
                 <span class="note-sub">radio za ljude i umjetnost. zagreb, 102.5 MHz.</span>
@@ -169,7 +175,7 @@
               <time>002</time>
             </button>
             <section class="post yt-card" role="button" tabindex="0" aria-label="YouTube playlist, slušaj nasumični zapis" aria-pressed="false">
-              <span class="radio-status"><span class="radio-dot" aria-hidden="true"></span>na projektu</span>
+              <span class="radio-status"><span class="radio-dot" aria-hidden="true"></span>van etera</span>
               <span class="note">
                 <span class="note-title">Rhythm Academy</span>
                 <span class="note-sub">jukebox iznenadjenja. svaki klik, drugi zapis.</span>
@@ -242,7 +248,7 @@
       const stopRadioCards = () => {
         radioCards.forEach((other) => {
           if (other.getAttribute("aria-pressed") === "true") {
-            stopStream(other, other._stream, "na projektu");
+            stopStream(other, other._stream, "van etera");
           }
         });
       };
@@ -303,7 +309,7 @@
                 },
                 onStateChange: (event) => {
                   if (event.data === YT.PlayerState.ENDED) {
-                    stopYt("na projektu");
+                    stopYt("van etera");
                   }
                 },
                 onError: () => stopYt("murija na vezi"),
@@ -322,7 +328,7 @@
           startRandomYt();
           return;
         }
-        stopYt("na projektu");
+        stopYt("van etera");
       });
 
       ytCard.addEventListener("keydown", (event) => {
@@ -339,10 +345,10 @@
 
         card.addEventListener("click", async () => {
           if (card.getAttribute("aria-pressed") !== "true") {
-            stopYt("na projektu");
+            stopYt("van etera");
             radioCards.forEach((other) => {
               if (other !== card && other.getAttribute("aria-pressed") === "true") {
-                stopStream(other, other._stream, "na projektu");
+                stopStream(other, other._stream, "van etera");
               }
             });
 
@@ -358,10 +364,10 @@
             return;
           }
 
-          stopStream(card, stream, "na projektu");
+          stopStream(card, stream, "van etera");
         });
 
-        stream.addEventListener("ended", () => stopStream(card, stream, "na projektu"));
+        stream.addEventListener("ended", () => stopStream(card, stream, "van etera"));
         stream.addEventListener("error", () => stopStream(card, stream, "murija na vezi"));
       });
     </script>
