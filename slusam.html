@@ -30,8 +30,15 @@
         width: 100%;
         border: 0;
         padding: clamp(20px, 3vw, 40px);
+        background: var(--background);
+        color: var(--text);
         font: inherit;
         text-align: left;
+        cursor: pointer;
+      }
+
+      .radio-card:hover {
+        color: var(--accent);
       }
 
       .radio-card[aria-pressed="true"] {
@@ -83,14 +90,24 @@
         line-height: 1.5;
       }
 
-      .note p {
+      .radio-card .note {
+        margin: auto 0;
+        text-align: center;
+      }
+
+      .radio-card .note-title {
+        font-size: clamp(15px, 1.5vw, 20px);
+      }
+
+      .note-sub {
+        display: block;
         margin: 8px 0 0;
         color: var(--muted);
         font-size: 12px;
         line-height: 1.6;
       }
 
-      .radio-card:hover .note p {
+      .radio-card:hover .note-sub {
         color: var(--accent);
       }
 
@@ -106,16 +123,14 @@
       <main>
         <article>
           <div class="post-grid" aria-label="Bilješke o slušanju">
-            <section class="post">
-              <button class="radio-card" type="button" aria-label="Radio Rojc Pula" aria-pressed="false">
-                <span class="radio-status"><span class="radio-dot" aria-hidden="true"></span>na projektu</span>
-                <span class="note">
-                  <span class="note-title">Radio Rojc Pula</span>
-                  <p>pravi nezavisni radio. klikni pa čuj.</p>
-                </span>
-              </button>
+            <button class="post radio-card" type="button" aria-label="Radio Rojc Pula" aria-pressed="false">
+              <span class="radio-status"><span class="radio-dot" aria-hidden="true"></span>na projektu</span>
+              <span class="note">
+                <span class="note-title">Radio Rojc Pula</span>
+                <span class="note-sub">pravi nezavisni radio. klikni pa čuj.</span>
+              </span>
               <time>001</time>
-            </section>
+            </button>
             <section class="post">
               <time>002</time>
               <p class="note" contenteditable="true" data-placeholder="Upiši bilješku..." aria-label="Bilješka 002">Tko sluša, taj ne govori. A tko govori, taj barem ne sluša.</p>
