@@ -111,6 +111,28 @@
         color: var(--accent);
       }
 
+      .yt-card {
+        position: relative;
+        cursor: pointer;
+      }
+
+      .yt-card[aria-pressed="true"] .radio-status,
+      .yt-card[aria-pressed="true"] {
+        color: var(--accent);
+      }
+
+      .yt-card[aria-pressed="true"] .radio-dot {
+        animation: radio-pulse 1.4s ease-in-out infinite;
+      }
+
+      .yt-card .yt-player {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+        pointer-events: none;
+      }
+
       @media (prefers-reduced-motion: reduce) {
         .radio-card[aria-pressed="true"] .radio-dot {
           animation: none;
@@ -139,13 +161,18 @@
               </span>
               <time>002</time>
             </button>
-            <section class="post">
+            <section class="post yt-card" role="button" tabindex="0" aria-label="YouTube playlist, slušaj nasumični zapis" aria-pressed="false">
+              <span class="radio-status"><span class="radio-dot" aria-hidden="true"></span>na projektu</span>
+              <span class="note">
+                <span class="note-title">Playlist</span>
+                <span class="note-sub">jukebox iznenadjenja. svaki klik, drugi zapis.</span>
+              </span>
               <time>003</time>
-              <p class="note" contenteditable="true" data-placeholder="Upiši bilješku..." aria-label="Bilješka 003">Tko sluša, taj ne govori. A tko govori, taj barem ne sluša.</p>
+              <span class="yt-player" aria-hidden="true"></span>
             </section>
             <section class="post">
               <time>004</time>
-              <p class="note" contenteditable="true" data-placeholder="Upiši bilješku..." aria-label="Bilješka 004"></p>
+              <p class="note" contenteditable="true" data-placeholder="Upiši bilješku..." aria-label="Bilješka 004">Tko sluša, taj ne govori. A tko govori, taj barem ne sluša.</p>
             </section>
             <section class="post">
               <time>005</time>
@@ -190,6 +217,104 @@
         setStatus(card, text);
       };
 
+      const ytCard = document.querySelector(".yt-card");
+      const ytStatus = ytCard.querySelector(".radio-status");
+      const ytPlayerHost = ytCard.querySelector(".yt-player");
+      const PLAYLIST_ID = "PLc3LtrDWaPMrd3yz8Jwu0EALmUTsSmTvE";
+      let ytPlayer = null;
+      let ytReady = false;
+      let ytWantPlaying = false;
+
+      const setYtStatus = (text) => {
+        ytStatus.replaceChildren(
+          ytStatus.querySelector(".radio-dot"),
+          document.createTextNode(text),
+        );
+      };
+
+      const stopRadioCards = () => {
+        radioCards.forEach((other) => {
+          if (other.getAttribute("aria-pressed") === "true") {
+            stopStream(other, other._stream, "na projektu");
+          }
+        });
+      };
+
+      const stopYt = (text) => {
+        ytWantPlaying = false;
+        if (ytPlayer && ytReady) {
+          ytPlayer.stopVideo();
+        }
+        ytCard.setAttribute("aria-pressed", "false");
+        setYtStatus(text);
+      };
+
+      const startRandomYt = () => {
+        ytWantPlaying = true;
+        ytCard.setAttribute("aria-pressed", "true");
+        setYtStatus("u eteru");
+
+        if (ytPlayer && ytReady) {
+          const total = ytPlayer.getPlaylist().length;
+          ytPlayer.playVideoAt(Math.floor(Math.random() * total));
+        } else {
+          loadYtPlayer();
+        }
+      };
+
+      const loadYtPlayer = () =>
+        new Promise((resolve) => {
+          if (ytPlayer) {
+            resolve();
+            return;
+          }
+          window.onYouTubeIframeAPIReady = () => {
+            ytPlayer = new YT.Player(ytPlayerHost, {
+              host: "https://www.youtube-nocookie.com",
+              playerVars: {
+                listType: "playlist",
+                list: PLAYLIST_ID,
+              },
+              events: {
+                onReady: () => {
+                  ytReady = true;
+                  ytPlayer.setShuffle(true);
+                  if (ytWantPlaying) {
+                    ytPlayer.playVideoAt(Math.floor(Math.random() * ytPlayer.getPlaylist().length));
+                  }
+                  resolve();
+                },
+                onStateChange: (event) => {
+                  if (event.data === YT.PlayerState.ENDED) {
+                    stopYt("na projektu");
+                  }
+                },
+                onError: () => stopYt("murija na vezi"),
+              },
+            });
+          };
+
+          const tag = document.createElement("script");
+          tag.src = "https://www.youtube.com/iframe_api";
+          document.head.appendChild(tag);
+        });
+
+      ytCard.addEventListener("click", () => {
+        stopRadioCards();
+        if (ytCard.getAttribute("aria-pressed") !== "true") {
+          startRandomYt();
+          return;
+        }
+        stopYt("na projektu");
+      });
+
+      ytCard.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          ytCard.click();
+        }
+      });
+
       radioCards.forEach((card) => {
         const stream = document.createElement("audio");
         stream.preload = "none";
@@ -197,6 +322,7 @@
 
         card.addEventListener("click", async () => {
           if (card.getAttribute("aria-pressed") !== "true") {
+            stopYt("na projektu");
             radioCards.forEach((other) => {
               if (other !== card && other.getAttribute("aria-pressed") === "true") {
                 stopStream(other, other._stream, "na projektu");
