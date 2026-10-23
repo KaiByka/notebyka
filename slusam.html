@@ -126,10 +126,12 @@
       }
 
       .yt-card .yt-player {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        opacity: 0;
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        width: 2px;
+        height: 2px;
+        border: 0;
         pointer-events: none;
       }
 
@@ -164,7 +166,7 @@
             <section class="post yt-card" role="button" tabindex="0" aria-label="YouTube playlist, slušaj nasumični zapis" aria-pressed="false">
               <span class="radio-status"><span class="radio-dot" aria-hidden="true"></span>na projektu</span>
               <span class="note">
-                <span class="note-title">Playlist</span>
+                <span class="note-title">Rhythm Academy</span>
                 <span class="note-sub">jukebox iznenadjenja. svaki klik, drugi zapis.</span>
               </span>
               <time>003</time>
@@ -255,7 +257,9 @@
         setYtStatus("u eteru");
 
         if (ytPlayer && ytReady) {
-          const total = ytPlayer.getPlaylist().length;
+          const total = ytPlayer.getPlaylist().length || 1;
+          ytPlayer.unMute();
+          ytPlayer.setVolume(100);
           ytPlayer.playVideoAt(Math.floor(Math.random() * total));
         } else {
           loadYtPlayer();
@@ -278,9 +282,17 @@
               events: {
                 onReady: () => {
                   ytReady = true;
+                  const frame = ytPlayer.getIframe();
+                  frame.setAttribute("allow", "autoplay; encrypted-media");
+                  frame.setAttribute("tabindex", "-1");
+                  ytPlayer.unMute();
+                  ytPlayer.setVolume(100);
                   ytPlayer.setShuffle(true);
                   if (ytWantPlaying) {
-                    ytPlayer.playVideoAt(Math.floor(Math.random() * ytPlayer.getPlaylist().length));
+                    const total = ytPlayer.getPlaylist().length || 1;
+                    ytPlayer.playVideoAt(Math.floor(Math.random() * total));
+                    ytPlayer.unMute();
+                    ytPlayer.setVolume(100);
                   }
                   resolve();
                 },
