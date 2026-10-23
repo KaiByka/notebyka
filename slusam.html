@@ -1,26 +1,197 @@
 <!doctype html>
 <html lang="hr">
   <head>
-    <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Bilješke o onome što slušam." /><title>Slušam — byka</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Bilješke o onome što slušam." />
+    <title>Slušam — byka</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/style.css" />
+    <link rel="stylesheet" href="assets/grid.css" />
     <style>
-      h1 {
-        margin: 10px 0 48px;
-        font-size: clamp(28px, 5vw, 40px);
-        font-weight: 500;
-        letter-spacing: -0.08em;
+      .layout {
+        width: 100%;
+        max-width: none;
+        margin: 0 auto;
+        padding: 0;
       }
 
-      .empty {
+      article {
+        margin-top: 0;
+      }
+
+      .radio-card {
+        width: 100%;
+        border: 0;
+        padding: clamp(20px, 3vw, 40px);
+        font: inherit;
+        text-align: left;
+      }
+
+      .radio-card[aria-pressed="true"] {
+        color: var(--accent);
+      }
+
+      .radio-status {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0 0 12px;
         color: var(--muted);
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .radio-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: currentColor;
+      }
+
+      .radio-card[aria-pressed="true"] .radio-status {
+        color: var(--accent);
+      }
+
+      .radio-card[aria-pressed="true"] .radio-dot {
+        animation: radio-pulse 1.4s ease-in-out infinite;
+      }
+
+      @keyframes radio-pulse {
+        0%,
+        100% {
+          opacity: 0.35;
+        }
+
+        50% {
+          opacity: 1;
+        }
+      }
+
+      .note-title {
+        display: block;
+        color: inherit;
+        font-size: clamp(13px, 1.1vw, 16px);
+        font-weight: 500;
+        line-height: 1.5;
+      }
+
+      .note p {
+        margin: 8px 0 0;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.6;
+      }
+
+      .radio-card:hover .note p {
+        color: var(--accent);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .radio-card[aria-pressed="true"] .radio-dot {
+          animation: none;
+        }
       }
     </style>
   </head>
-  <body><div class="layout"><main><a class="back" href="index.html">← kući</a><article><div class="eyebrow">Kategorija</div><h1>Slušam</h1><p class="empty">Još nema bilješki u ovoj kategoriji.</p></article><footer><div>Notes from a small corner of the internet.</div><nav class="footer-nav" aria-label="Primary navigation"><a href="about.html">Pomalo</a><a href="now.html">Aktualac</a><a href="citam.html">Čitam</a><a href="gledam.html">Gledam</a><a href="slusam.html">Slušam</a><a href="ucim.html">Učim</a><a href="razmisljam.html">Razmišljam</a></nav></footer></main></div></body>
+  <body>
+    <div class="layout">
+      <main>
+        <article>
+          <div class="post-grid" aria-label="Bilješke o slušanju">
+            <section class="post">
+              <button class="radio-card" type="button" aria-label="Radio Rojc Pula" aria-pressed="false">
+                <span class="radio-status"><span class="radio-dot" aria-hidden="true"></span>na projektu</span>
+                <span class="note">
+                  <span class="note-title">Radio Rojc Pula</span>
+                  <p>pravi nezavisni radio. klikni pa čuj.</p>
+                </span>
+              </button>
+              <time>001</time>
+            </section>
+            <section class="post">
+              <time>002</time>
+              <p class="note" contenteditable="true" data-placeholder="Upiši bilješku..." aria-label="Bilješka 002">Tko sluša, taj ne govori. A tko govori, taj barem ne sluša.</p>
+            </section>
+            <section class="post">
+              <time>003</time>
+              <p class="note" contenteditable="true" data-placeholder="Upiši bilješku..." aria-label="Bilješka 003"></p>
+            </section>
+            <section class="post">
+              <time>004</time>
+              <p class="note" contenteditable="true" data-placeholder="Upiši bilješku..." aria-label="Bilješka 004"></p>
+            </section>
+            <section class="post">
+              <time>005</time>
+              <p class="note" contenteditable="true" data-placeholder="Upiši bilješku..." aria-label="Bilješka 005"></p>
+            </section>
+            <section class="post">
+              <time>006</time>
+              <p class="note" contenteditable="true" data-placeholder="Upiši bilješku..." aria-label="Bilješka 006"></p>
+            </section>
+            <section class="post">
+              <time>007</time>
+              <p class="note" contenteditable="true" data-placeholder="Upiši bilješku..." aria-label="Bilješka 007"></p>
+            </section>
+            <section class="post">
+              <time>008</time>
+              <p class="note" contenteditable="true" data-placeholder="Upiši bilješku..." aria-label="Bilješka 008"></p>
+            </section>
+            <section class="post">
+              <time>009</time>
+              <p class="note" contenteditable="true" data-placeholder="Upiši bilješku..." aria-label="Bilješka 009"></p>
+            </section>
+          </div>
+        </article>
+      </main>
+    </div>
+    <audio id="radio-stream" preload="none" src="https://radio.widecast.cloud/stream/radiorojc.mp3"></audio>
+    <script>
+      const radioCard = document.querySelector(".radio-card");
+      const radioStream = document.querySelector("#radio-stream");
+      const radioStatus = document.querySelector(".radio-status");
+
+      const setStatus = (text) => {
+        radioStatus.replaceChildren(
+          radioStatus.querySelector(".radio-dot"),
+          document.createTextNode(text),
+        );
+      };
+
+      radioCard.addEventListener("click", async () => {
+        if (radioStream.paused) {
+          try {
+            await radioStream.play();
+            radioCard.setAttribute("aria-pressed", "true");
+            setStatus("u eteru");
+          } catch (error) {
+            console.error("Radio stream nije moguće pokrenuti.", error);
+            setStatus("murija na vezi");
+          }
+          return;
+        }
+
+        radioStream.pause();
+        radioCard.setAttribute("aria-pressed", "false");
+        setStatus("na projektu");
+      });
+
+      radioStream.addEventListener("ended", () => {
+        radioCard.setAttribute("aria-pressed", "false");
+        setStatus("na projektu");
+      });
+
+      radioStream.addEventListener("error", () => {
+        radioCard.setAttribute("aria-pressed", "false");
+        setStatus("murija na vezi");
+      });
+    </script>
+  </body>
 </html>
