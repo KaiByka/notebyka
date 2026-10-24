@@ -14,11 +14,40 @@
     />
     <link rel="stylesheet" href="assets/style.css" />
     <link rel="stylesheet" href="assets/grid.css" />
+    <script src="assets/site.js" defer></script>
     <style>
-      .post.read time::before {
-        content: "\00b7";
-        margin-right: 8px;
+      .post {
+        position: relative;
+      }
+
+      .post.read {
+        background: var(--surface-active);
+      }
+
+      .post.read::before,
+      .post.reading::before {
+        position: absolute;
+        top: clamp(20px, 3vw, 40px);
+        left: clamp(20px, 3vw, 40px);
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        padding: 6px 2px;
+        font-size: 10px;
+        line-height: 1;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .post.read::before {
+        content: "PROČITANO";
+        border: 1px solid var(--accent);
         color: var(--accent);
+      }
+
+      .post.reading::before {
+        content: "ČITAM";
+        background: var(--accent);
+        color: #f7f7f4;
       }
 
       .note-title {
@@ -52,6 +81,10 @@
   <body>
     <div class="layout">
       <main>
+        <header class="grid-header">
+          <a class="back" href="index.html">← <span class="brand-accent">note:</span>byka</a>
+          <div class="grid-header-title">Čitam // polica 001–008</div>
+        </header>
         <article>
           <div class="post-grid" aria-label="Bilješke o čitanju">
             <section class="post read">
@@ -63,13 +96,24 @@
             </section>
             <section class="post"><time>002</time><div class="note"><span class="note-title">The Story of Capital</span><p>David Harvey</p></div></section>
             <section class="post read"><time>003</time><div class="note"><span class="note-title">The Anti-Capitalist Chronicles</span><p>David Harvey</p></div></section>
-            <section class="post"><time>004</time><div class="note"><span class="note-title">Majstor i Margarita</span><p>Mihail Bulgakov</p></div></section>
+            <section class="post reading"><time>004</time><div class="note"><span class="note-title">Majstor i Margarita</span><p>Mihail Bulgakov</p></div></section>
             <section class="post"><time>005</time><div class="note"><span class="note-title">Zvižduk s Bukovca</span><p>Zvonimir Milčec</p></div></section>
             <section class="post"><time>006</time><div class="note"><span class="note-title">Probna faza</span><p>Thomas Pynchon</p></div></section>
             <section class="post"><time>007</time><div class="note"></div></section>
             <section class="post"><time>008</time><div class="note"></div></section>
-            <section class="post"><time>009</time><div class="note"></div></section>
           </div>
+          <footer class="grid-footer">
+            <div class="grid-footer-note">Knjige ne grizu, osim kad grizu.</div>
+            <nav class="footer-nav" aria-label="Primary navigation">
+              <a href="about.html">Pomalo</a>
+              <a href="now.html">Aktualac</a>
+              <a href="citam.html" aria-current="page">[Čitam]</a>
+              <a href="gledam.html">Gledam</a>
+              <a href="slusam.html">Slušam</a>
+              <a href="ucim.html">Učim</a>
+              <a href="razmisljam.html">Razmišljam</a>
+            </nav>
+          </footer>
         </article>
       </main>
     </div>

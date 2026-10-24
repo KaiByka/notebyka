@@ -4,22 +4,27 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Gledam ali ne vidim." />
-    <title>Gledam</title>
+    <title>Gledam — byka</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="assets/style.css" />
     <link rel="stylesheet" href="assets/grid.css" />
+    <script src="assets/site.js" defer></script>
   </head>
   <body>
     <div class="layout">
       <main>
+        <header class="grid-header">
+          <a class="back" href="index.html">← <span class="brand-accent">note:</span>byka</a>
+          <div class="grid-header-title">Gledam // pokretne slike</div>
+        </header>
         <article>
           <div class="post-grid" aria-label="Notes grid">
             <section class="post">
-              <time datetime="2027-01-01">2026-10-19</time>
-              <p class="note" contenteditable="true" data-placeholder="Upiši bilješku..." aria-label="Bilješka za 2027.01.01">Ajme meni, nema ništa intrigantno za gledati.</p>
+              <time datetime="2026-10-19">2026-10-19</time>
+              <p class="note" contenteditable="true" data-placeholder="Upiši bilješku..." aria-label="Bilješka za 2026.10.19">Ajme meni, nema ništa intrigantno za gledati.</p>
             </section>
             <section class="post">
               <time datetime="2026-09-12">2026-09-12</time>
@@ -50,6 +55,18 @@
               <p class="note" contenteditable="true" data-placeholder="Upiši bilješku..." aria-label="Bilješka za 2026.03.14">Bilješke su sada slobodne, bez linka i bez naslova.</p>
             </section>
           </div>
+          <footer class="grid-footer">
+            <div class="grid-footer-note">Gledam u daljinu nešto kako me žulja.</div>
+            <nav class="footer-nav" aria-label="Primary navigation">
+              <a href="about.html">Pomalo</a>
+              <a href="now.html">Aktualac</a>
+              <a href="citam.html">Čitam</a>
+              <a href="gledam.html" aria-current="page">[Gledam]</a>
+              <a href="slusam.html">Slušam</a>
+              <a href="ucim.html">Učim</a>
+              <a href="razmisljam.html">Razmišljam</a>
+            </nav>
+          </footer>
         </article>
       </main>
     </div>

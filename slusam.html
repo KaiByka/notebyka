@@ -14,21 +14,13 @@
     />
     <link rel="stylesheet" href="assets/style.css" />
     <link rel="stylesheet" href="assets/grid.css" />
+    <script src="assets/site.js" defer></script>
     <style>
-      .layout {
-        width: 100%;
-        max-width: none;
-        margin: 0 auto;
-        padding: 0;
-      }
-
-      article {
-        margin-top: 0;
-      }
-
       .radio-card {
         width: 100%;
         border: 0;
+        border-right: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
         padding: clamp(20px, 3vw, 40px);
         background: var(--background);
         color: var(--text);
@@ -41,8 +33,11 @@
         color: var(--accent);
       }
 
-      .radio-card[aria-pressed="true"] {
+      .radio-card[aria-pressed="true"],
+      .yt-card[aria-pressed="true"] {
+        background: var(--surface-active);
         color: var(--accent);
+        box-shadow: inset 0 0 0 1px var(--accent);
       }
 
       .radio-status {
@@ -62,11 +57,13 @@
         background: currentColor;
       }
 
-      .radio-card[aria-pressed="true"] .radio-status {
+      .radio-card[aria-pressed="true"] .radio-status,
+      .yt-card[aria-pressed="true"] .radio-status {
         color: var(--accent);
       }
 
-      .radio-card[aria-pressed="true"] .radio-dot {
+      .radio-card[aria-pressed="true"] .radio-dot,
+      .yt-card[aria-pressed="true"] .radio-dot {
         animation: radio-pulse 1.4s ease-in-out infinite;
       }
 
@@ -89,12 +86,14 @@
         line-height: 1.5;
       }
 
-      .radio-card .note {
+      .radio-card .note,
+      .yt-card .note {
         margin: auto 0;
         text-align: center;
       }
 
-      .radio-card .note-title {
+      .radio-card .note-title,
+      .yt-card .note-title {
         font-size: clamp(15px, 1.5vw, 20px);
       }
 
@@ -106,7 +105,10 @@
         line-height: 1.6;
       }
 
-      .radio-card:hover .note-sub {
+      .radio-card:hover .note-sub,
+      .radio-card[aria-pressed="true"] .note-sub,
+      .yt-card:hover .note-sub,
+      .yt-card[aria-pressed="true"] .note-sub {
         color: var(--accent);
       }
 
@@ -127,15 +129,6 @@
         cursor: pointer;
       }
 
-      .yt-card[aria-pressed="true"] .radio-status,
-      .yt-card[aria-pressed="true"] {
-        color: var(--accent);
-      }
-
-      .yt-card[aria-pressed="true"] .radio-dot {
-        animation: radio-pulse 1.4s ease-in-out infinite;
-      }
-
       .yt-card .yt-player {
         position: fixed;
         right: 0;
@@ -147,7 +140,8 @@
       }
 
       @media (prefers-reduced-motion: reduce) {
-        .radio-card[aria-pressed="true"] .radio-dot {
+        .radio-card[aria-pressed="true"] .radio-dot,
+        .yt-card[aria-pressed="true"] .radio-dot {
           animation: none;
         }
       }
@@ -156,6 +150,10 @@
   <body>
     <div class="layout">
       <main>
+        <header class="grid-header">
+          <a class="back" href="index.html">← <span class="brand-accent">note:</span>byka</a>
+          <div class="grid-header-title">Slušam // frekvencije i šumovi</div>
+        </header>
         <article>
           <div class="post-grid" aria-label="Bilješke o slušanju">
             <button class="post radio-card" type="button" data-stream="https://radio.widecast.cloud/stream/radiorojc.mp3" aria-label="Radio Rojc Pula" aria-pressed="false">
@@ -178,7 +176,7 @@
               <span class="radio-status"><span class="radio-dot" aria-hidden="true"></span>van etera</span>
               <span class="note">
                 <span class="note-title">Rhythm Academy</span>
-                <span class="note-sub">jukebox iznenadjenja. svaki klik, drugi zapis.</span>
+                <span class="note-sub">jukebox iznenađenja. svaki klik, drugi zapis.</span>
               </span>
               <time>003</time>
               <span class="yt-player" aria-hidden="true"></span>
@@ -203,11 +201,19 @@
               <time>008</time>
               <p class="note" contenteditable="true" data-placeholder="Upiši bilješku..." aria-label="Bilješka 008"></p>
             </section>
-            <section class="post">
-              <time>009</time>
-              <p class="note" contenteditable="true" data-placeholder="Upiši bilješku..." aria-label="Bilješka 009"></p>
-            </section>
           </div>
+          <footer class="grid-footer">
+            <div class="grid-footer-note">Radio ne umire dok god ima nekoga u eteru.</div>
+            <nav class="footer-nav" aria-label="Primary navigation">
+              <a href="about.html">Pomalo</a>
+              <a href="now.html">Aktualac</a>
+              <a href="citam.html">Čitam</a>
+              <a href="gledam.html">Gledam</a>
+              <a href="slusam.html" aria-current="page">[Slušam]</a>
+              <a href="ucim.html">Učim</a>
+              <a href="razmisljam.html">Razmišljam</a>
+            </nav>
+          </footer>
         </article>
       </main>
     </div>

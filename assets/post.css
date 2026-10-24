@@ -1,3 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&display=swap");
+
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  z-index: 950;
+  background: transparent;
+  pointer-events: none;
+}
+
+.reading-progress-bar {
+  height: 100%;
+  width: var(--scroll-pct, 0%);
+  background: var(--accent);
+  transition: width 60ms linear;
+}
+
+article {
+  counter-reset: post-section;
+}
+
 h1 {
   margin: 10px 0 12px;
   font-size: clamp(26px, 5vw, 40px);
@@ -8,6 +32,8 @@ h1 {
 
 .meta {
   margin: 0 0 48px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
   color: var(--muted);
   font-size: 12px;
 }
@@ -18,9 +44,27 @@ article p {
 }
 
 article h2 {
-  margin: 48px 0 12px;
-  font-size: 18px;
+  counter-increment: post-section;
+  margin: 52px 0 14px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  font-family: "Newsreader", Georgia, serif;
+  font-optical-sizing: auto;
+  font-size: clamp(19px, 2.4vw, 24px);
   font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+article h2::before {
+  content: counter(post-section, decimal-leading-zero) " // ";
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  vertical-align: middle;
+  margin-right: 4px;
 }
 
 article h3 {
@@ -31,6 +75,17 @@ article h3 {
 
 article a {
   color: var(--accent);
+}
+
+article ol,
+article ul {
+  max-width: 640px;
+  margin: 0 0 24px;
+  padding-left: 24px;
+}
+
+article li + li {
+  margin-top: 4px;
 }
 
 .section-title {
@@ -44,6 +99,7 @@ article a {
   top: 50%;
   transform: translateY(-50%) rotate(180deg);
   writing-mode: vertical-rl;
+  white-space: nowrap;
   max-height: 80vh;
   color: var(--muted);
   font-size: 12px;
